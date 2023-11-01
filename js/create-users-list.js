@@ -1,4 +1,4 @@
-import {getRandomNumber, isNormalStringLenght, getRandomArrayElement, RandomUniqueNumber} from './util.js';
+import {getRandomNumber, getRandomArrayElement, RandomUniqueNumber} from './util.js';
 
 
 const DESCRIPTIONS = [
@@ -37,7 +37,7 @@ function createComment () {
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
-  }
+  };
 }
 
 function createUser() {
@@ -47,11 +47,13 @@ function createUser() {
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
     comments: Array.from({length: getRandomNumber(1, 5)}, createComment),
-  }
+  };
 }
 
 function createUsersList(count) {
   return Array.from({length: count}, createUser);
 }
 
-export {createUsersList};
+const usersList = createUsersList(25);
+
+export {usersList};
