@@ -17,3 +17,5 @@ function addPicturesToPage(picturesArray) {
 
 addPicturesToPage(usersList);
 
+export {picturesList};
+
