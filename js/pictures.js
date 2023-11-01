@@ -6,7 +6,7 @@ const picturesListFragment = document.createDocumentFragment();
 
 function addPicturesToPage(picturesArray) {
   picturesArray.forEach(({url, likes, comments}) => {
-    let newPageElement = pictureTemplate.cloneNode(true);
+    const newPageElement = pictureTemplate.cloneNode(true);
     newPageElement.querySelector('.picture__img').src = url;
     newPageElement.querySelector('.picture__comments').textContent = comments.length;
     newPageElement.querySelector('.picture__likes').textContent = likes;
