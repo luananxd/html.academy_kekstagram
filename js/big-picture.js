@@ -1,39 +1,38 @@
 import {picturesList} from './pictures.js';
 import {usersPhotoList} from './create-users-list.js';
 
-const pictureItems = picturesList.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
 const bigPictureCloseButton = bigPicture.querySelector('.big-picture__cancel');
 
-const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
-const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
+const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 
-pictureItems.forEach((picture, index) => {
-  picture.addEventListener('click', () => {
-    bigPicture.classList.remove('hidden');
-    document.body.classList.add('modal-open');
+function openBigPicture() {
+  bigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
 
-    const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
-    const likesCount = bigPicture.querySelector('.likes-count');
-    const commentsCount = bigPicture.querySelector('.comments-count');
-    const bigPictureDescription = bigPicture.querySelector('.social__caption');
+  document.addEventListener('keydown', onBigPictureEscapeKeydown);
+}
 
-    bigPictureImage.src = usersList[index].url;
-    likesCount.textContent = usersList[index].likes;
-    commentsCount.textContent = usersList[index].comments.length;
-    bigPictureDescription.textContent = usersList[index].description;
-    bigPictureCommentsList.innerHTML = '';
-    addComments(usersList[index].comments);
+function closeBigPicture() {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
 
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
-  });
-});
+  document.removeEventListener('keydown', onBigPictureEscapeKeydown);
+}
 
-function addComments(commentsArray) {
+function onBigPictureEscapeKeydown() {
+  if(event.key === 'Escape') {
+    closeBigPicture();
+  }
+}
+
+function renderBigPictureComments(commentsArray) {
+  const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
   const commentsListFragment = document.createDocumentFragment();
+
+  bigPictureCommentsList.innerHTML = '';
 
   commentsArray.forEach(({avatar, message, name}) => {
     const newComment = commentTemplate.cloneNode(true);
@@ -46,16 +45,34 @@ function addComments(commentsArray) {
   bigPictureCommentsList.append(commentsListFragment);
 }
 
-bigPictureCloseButton.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-});
+function renderBigPicture({url, likes, comments, description}) {
+  const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
+  const likesCount = bigPicture.querySelector('.likes-count');
+  const commentsCount = bigPicture.querySelector('.comments-count');
+  const bigPictureDescription = bigPicture.querySelector('.social__caption');
 
-document.addEventListener('keydown', (event) => {
-  if(event.key === 'Escape') {
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+  bigPictureImage.src = url;
+  likesCount.textContent = likes;
+  commentsCount.textContent = comments.length;
+  bigPictureDescription.textContent = description;
+  renderBigPictureComments(comments);
+}
+
+picturesList.addEventListener('click', (e) => {
+  if(e.target.className !== 'picture__img' && e.target.className !== 'picture__info') {
+    return;
   }
-});
 
-addComments(usersList[0].comments);
+  openBigPicture();
+  const picture = e.target.parentNode;
+  const pictureId = picture.dataset.pictureId;
+
+  renderBigPicture(usersPhotoList[pictureId - 1]);
+
+  bigPictureCloseButton.addEventListener('click', () => {
+    closeBigPicture();
+  })
+})
+
+socialCommentCount.classList.add('hidden');
+commentsLoader.classList.add('hidden');
