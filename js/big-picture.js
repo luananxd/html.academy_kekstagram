@@ -5,6 +5,7 @@ const pictureItems = picturesList.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
 const bigPictureCloseButton = bigPicture.querySelector('.big-picture__cancel');
+
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
