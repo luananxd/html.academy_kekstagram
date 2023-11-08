@@ -4,9 +4,10 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const picturesList = document.querySelector('.pictures');
 const picturesListFragment = document.createDocumentFragment();
 
-function createPictureElement(picturesArray) {
-  picturesArray.forEach(({url, likes, comments}) => {
+function createPicturesElement(picturesArray) {
+  picturesArray.forEach(({id, url, likes, comments}) => {
     const newPageElement = pictureTemplate.cloneNode(true);
+    newPageElement.dataset.pictureId = id;
     newPageElement.querySelector('.picture__img').src = url;
     newPageElement.querySelector('.picture__comments').textContent = comments.length;
     newPageElement.querySelector('.picture__likes').textContent = likes;
@@ -14,7 +15,7 @@ function createPictureElement(picturesArray) {
   });
 }
 
-createPictureElement(usersList)
+createPicturesElement(usersList);
 picturesList.append(picturesListFragment);
 
 export {picturesList};
