@@ -1,4 +1,4 @@
-import {usersList} from './create-users-list.js';
+import {usersPhotoList} from './create-users-list.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesList = document.querySelector('.pictures');
@@ -15,7 +15,7 @@ function createPicturesElement(picturesArray) {
   });
 }
 
-createPicturesElement(usersList);
+createPicturesElement(usersPhotoList);
 picturesList.append(picturesListFragment);
 
 export {picturesList};

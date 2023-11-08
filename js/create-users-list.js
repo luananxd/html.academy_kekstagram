@@ -50,10 +50,10 @@ function createUser() {
   };
 }
 
-function createUsersList(count) {
+function createUsersPhotoList(count) {
   return Array.from({length: count}, createUser);
 }
 
-const usersList = createUsersList(25);
+const usersPhotoList = createUsersPhotoList(25);
 
-export {usersList};
+export {usersPhotoList};

@@ -1,5 +1,5 @@
 import {picturesList} from './pictures.js';
-import {usersList} from './create-users-list.js';
+import {usersPhotoList} from './create-users-list.js';
 
 const pictureItems = picturesList.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
