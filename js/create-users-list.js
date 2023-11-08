@@ -42,7 +42,7 @@ function createComment () {
 
 function createUser() {
   return {
-    id: usersStartID++,
+    id: ++usersStartID,
     url: `photos/${usersStartID}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
