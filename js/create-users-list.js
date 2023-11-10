@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomArrayElement, RandomUniqueNumber} from './util.js';
+import {getRandomNumber, getRandomArrayElement, getRandomUniqueNumber} from './util.js';
 
 
 const DESCRIPTIONS = [
@@ -29,7 +29,7 @@ const MESSAGES = [
 
 let usersStartID = 0;
 
-const randomCommentID = RandomUniqueNumber();
+const randomCommentID = getRandomUniqueNumber();
 
 function createComment () {
   return {
@@ -46,7 +46,7 @@ function createUser() {
     url: `photos/${usersStartID}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
-    comments: Array.from({length: getRandomNumber(1, 5)}, createComment),
+    comments: Array.from({length: getRandomNumber(1, 10)}, createComment),
   };
 }
 
