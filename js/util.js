@@ -11,7 +11,7 @@ function getRandomArrayElement (array) {
   return array[getRandomNumber(0, array.length - 1)];
 }
 
-function RandomUniqueNumber() {
+function getRandomUniqueNumber() {
   const numbers = new Set();
 
   return function(min, max) {
@@ -27,4 +27,8 @@ function RandomUniqueNumber() {
   };
 }
 
-export {getRandomNumber, isNormalStringLenght, getRandomArrayElement, RandomUniqueNumber};
+export {getRandomNumber,
+        isNormalStringLenght,
+        getRandomArrayElement,
+        getRandomUniqueNumber,
+        };
