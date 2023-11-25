@@ -81,7 +81,7 @@ picturesList.addEventListener('click', (e) => {
   const picture = e.target.parentNode;
   const pictureId = picture.dataset.pictureId;
 
-  renderBigPicture(usersPhotoList[pictureId - 1]);
+  renderBigPicture(usersPhotoList[pictureId]);
 
   bigPictureCloseButton.addEventListener('click', () => {
     closeBigPicture();
