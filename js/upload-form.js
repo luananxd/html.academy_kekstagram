@@ -4,6 +4,7 @@ import { showError, showSuccess } from './util.js';
 const form = document.querySelector('.img-upload__form');
 const uploadFileInput = document.querySelector('#upload-file');
 const imageEditWindow = document.querySelector('.img-upload__overlay');
+const imagePreview = document.querySelector('.img-upload__preview img');
 const formSubmitButton = document.querySelector('.img-upload__submit');
 const formCloseButton = document.querySelector('#upload-cancel');
 const hashtagsInput = document.querySelector('.text__hashtags');
@@ -65,6 +66,9 @@ function validateHashtags() {
 
 uploadFileInput.addEventListener('change', () => {
   if(!/^C:\\fakepath\\.{1,1000}.[jpg, png]/.test(uploadFileInput.value)) {return;}
+
+  const userPhoto = uploadFileInput.files[0];
+  imagePreview.src = URL.createObjectURL(userPhoto);
 
   openForm();
   hashtagsInput.addEventListener('keydown', (e) => {
