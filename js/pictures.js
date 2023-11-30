@@ -1,6 +1,3 @@
-import { getServerData } from './server.js';
-import { showServerMessage } from './util.js';
-
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesList = document.querySelector('.pictures');
 const picturesListFragment = document.createDocumentFragment();
@@ -17,18 +14,5 @@ function createPicturesElement(picturesArray) {
   picturesList.append(picturesListFragment);
 }
 
-getServerData('https://25.javascript.pages.academy/kekstagram/data').
-  then((response) => {
-    if(response.ok) {
-      return response.json();
-    }
-
-    throw new Error('Не удалось связаться с сервером');
-  }).
-  then((data) => createPicturesElement(data)).
-  catch((err) => {
-    showServerMessage(err);
-  });
-
-export { picturesList };
+export { picturesList, createPicturesElement };
 

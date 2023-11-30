@@ -1,5 +1,4 @@
 import {picturesList} from './pictures.js';
-import {usersPhotoList} from './create-users-list.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
@@ -29,7 +28,7 @@ function onBigPictureEscapeKeydown() {
   }
 }
 
-function renderBigPictureComments(commentsArray) {
+function renderBigPictureComments() {
   let i = 0;
   let page = 5;
 
@@ -49,7 +48,7 @@ function renderBigPictureComments(commentsArray) {
       bigPictureCommentsList.append(newComment);
     }
 
-    socialCommentCount.textContent = i;
+    socialCommentCount.textContent = 5;
 
     commentsLoader.addEventListener('click', () => {
       page += 5;
@@ -72,18 +71,22 @@ function renderBigPicture({url, likes, comments, description}) {
   renderBigPictureComments(comments)(comments);
 }
 
-picturesList.addEventListener('click', (e) => {
-  if(e.target.className !== 'picture__img' && e.target.className !== 'picture__info') {
-    return;
-  }
+function viewBigPicture(usersPhotoList) {
+  picturesList.addEventListener('click', (e) => {
+    if(e.target.className !== 'picture__img' && e.target.className !== 'picture__info') {
+      return;
+    }
 
-  openBigPicture();
-  const picture = e.target.parentNode;
-  const pictureId = picture.dataset.pictureId;
+    const picture = e.target.parentNode;
+    const pictureId = picture.dataset.pictureId;
 
-  renderBigPicture(usersPhotoList[pictureId]);
+    renderBigPicture(usersPhotoList[pictureId]);
+    openBigPicture();
 
-  bigPictureCloseButton.addEventListener('click', () => {
-    closeBigPicture();
+    bigPictureCloseButton.addEventListener('click', () => {
+      closeBigPicture();
+    });
   });
-});
+}
+
+export { viewBigPicture };
